@@ -1,0 +1,137 @@
+RewriteEngine on
+
+# Some hosts require a rewritebase rule, if so, uncomment the RewriteBase line below. If you are running from a subdirectory, your rewritebase should match the name of the path to where stacey is stored.
+# ie. if in a folder named 'stacey', RewriteBase /stacey
+#RewriteBase /
+
+ErrorDocument 404 /404.html
+
+# Rewrite any calls to *.html, *.json, *.xml, *.atom, *.rss, *.rdf or *.txt if a folder matching * exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !public/
+RewriteCond %{DOCUMENT_ROOT}/public/$1.$2 !-f
+RewriteRule (.+)\.(html|json|xml|atom|rss|rdf|txt)$ $1/ [L]
+
+# Add a trailing slash to directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.)
+RewriteCond %{REQUEST_URI} !(.*)/$
+RewriteRule ([^/]+)$ $1/ [L]
+
+# Rewrite any calls to /* or /app to the index.php file
+RewriteCond %{REQUEST_URI} /app/$
+RewriteRule ^app/ index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ index.php?$1 [L]
+
+# Rewrite any file calls to the public directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !public/
+RewriteRule ^(.+)$ public/$1 [L]
+
+
+<IfModule mod_setenvif.c>
+  <IfModule mod_headers.c>
+    BrowserMatch MSIE ie
+    Header set X-UA-Compatible "IE=Edge,chrome=1" env=ie
+  </IfModule>
+</IfModule>
+
+# video
+AddType video/ogg  ogg ogv
+AddType video/mp4  mp4
+AddType video/webm webm
+
+# Proper svg serving. Required for svg webfonts on iPad
+#   twitter.com/FontSquirrel/status/14855840545
+AddType image/svg+xml                 svg svgz 
+
+# webfonts
+AddType application/vnd.ms-fontobject eot
+AddType font/ttf                      ttf
+AddType font/otf                      otf
+AddType font/x-woff                   woff
+
+AddType text/cache-manifest           manifest
+
+
+# gzip compression.
+<IfModule mod_deflate.c>
+
+# html, xml, css, and js:
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json 
+
+# webfonts and svg:
+  <FilesMatch "\.(ttf|otf|eot|svg)$" >
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  Header set cache-control: public
+  ExpiresActive on
+
+# Perhaps better to whitelist expires rules? Perhaps.
+  ExpiresDefault                          "access plus 1 month"
+
+# cache.manifest needs re-reqeusts in FF 3.6 (thx Remy ~Introducing HTML5)
+  ExpiresByType text/cache-manifest       "access plus 0 seconds"
+
+# your document html 
+  ExpiresByType text/html                  "access"
+
+# rss feed
+  ExpiresByType application/rss+xml       "access plus 1 hour"
+
+# favicon (cannot be renamed)
+  ExpiresByType image/vnd.microsoft.icon  "access plus 1 week" 
+
+# media: images, video, audio
+  ExpiresByType image/png                 "access plus 1 month"
+  ExpiresByType image/jpg                 "access plus 1 month"
+  ExpiresByType image/jpeg                "access plus 1 month"
+  ExpiresByType video/ogg                 "access plus 1 month"
+  ExpiresByType audio/ogg                 "access plus 1 month"
+  ExpiresByType video/mp4                 "access plus 1 month"
+  
+# webfonts
+  ExpiresByType font/ttf                  "access plus 1 month"
+  ExpiresByType font/woff                 "access plus 1 month"
+  ExpiresByType image/svg+xml             "access plus 1 month"
+  
+# css and javascript
+  ExpiresByType text/css                  "access plus 1 month"
+  ExpiresByType application/javascript    "access plus 1 month"
+  ExpiresByType text/javascript           "access plus 1 month"
+</IfModule>
+
+
+
+
+# Since we're sending far-future expires, we don't need ETags for
+# static content.
+#   developer.yahoo.com/performance/rules.html#etags
+FileETag None
+
+
+# without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist (e.g. “/blog/hello”)
+#   webmasterworld.com/apache/3808792.htm
+Options -MultiViews 
+# -Indexes will have Apache block users from browsing folders without a default document
+# Options -Indexes
+
+
+
+# custom 404 page
+ErrorDocument 404 /404.html
+
+
+
+# use utf-8 encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
+# force utf-8 for a number of file formats
+AddCharset utf-8 .html .css .js .xml .json .rss
+

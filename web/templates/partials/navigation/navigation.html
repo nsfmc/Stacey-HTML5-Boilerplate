@@ -1,0 +1,13 @@
+<ul id="navigation">
+	foreach $root do
+		<li if @is_current do class="currentpage" endif>
+  		if $children do
+			  <a href="#">@title</a>
+		  endif 
+  		if !$children do
+			<a href="@url">@title</a>
+  		endif
+			:children
+		</li>
+	endforeach
+</ul>

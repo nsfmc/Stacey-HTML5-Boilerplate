@@ -1,0 +1,7 @@
+name: Site Name
+-
+sitetitle: Page Title
+-
+contact: contact name
+-
+email: <email@address.org>
