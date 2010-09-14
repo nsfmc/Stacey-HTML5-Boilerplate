@@ -56,7 +56,7 @@ Class TemplateParser {
       return $template_parts;
   }
   
-  static function parse($data, $template, $tmpl_filetype="html") {
+  static function parse($data, $template) {
     # parse template
     if(preg_match('/get[\s]+?["\']\/?(.*?)\/?["\']\s+?do\s+?([\S\s]+?)end(?!\w)/', $template)) {
       $template = self::parse_get($data, $template);
@@ -75,11 +75,7 @@ Class TemplateParser {
     }
     
     if(preg_match('/\@[\w\d_\-]+?/', $template)) {
-      if($tmpl_filetype[1] == "css"){
-        $template = self::parse_css_vars($data, $template);
-      }else{
-        $template = self::parse_vars($data, $template);
-      }
+      $template = self::parse_vars($data, $template);
     }
     
     return $template;
@@ -200,21 +196,9 @@ Class TemplateParser {
       if(is_string($value)) $template = preg_replace('/'.$var.'/', $value, $template);
     }
     
-    # replace any remaining @ symbols with their html entity code equivalents to prevent vars being replaced in the incorrect context
-    $template = str_replace('@', '&#64;', $template);
     return $template;
   }
-  
-  static function parse_css_vars($data, $template) {
-    # instead of replacing lone @s in css files, leave them alone
-    # split out the partial into the parts Before, Inside, and After the @var
-    foreach($data as $key => $value) {
-      $var = ($key == '@root_path') ? $key.'\/?' : $key;
-      if(is_string($value)) $template = preg_replace('/'.$var.'/', $value, $template);
-    }
     
-    return $template;
-  }
 }
 
 ?>

@@ -2269,13 +2269,13 @@ class MarkdownExtra_Parser extends Markdown_Parser {
       return $matches[0];
     $level = $matches[3]{0} == '=' ? 1 : 2;
     $attr  = $this->_doHeaders_attr($id =& $matches[2]);
-    $block = "<h$level$attr class=\"donthyphenate\">".$this->runSpanGamut($matches[1])."</h$level>";
+    $block = "<h$level$attr>".$this->runSpanGamut($matches[1])."</h$level>";
     return "\n" . $this->hashBlock($block) . "\n\n";
   }
   function _doHeaders_callback_atx($matches) {
     $level = strlen($matches[1]);
     $attr  = $this->_doHeaders_attr($id =& $matches[3]);
-    $block = "<h$level$attr class=\"donthyphenate\">".$this->runSpanGamut($matches[2])."</h$level>";
+    $block = "<h$level$attr>".$this->runSpanGamut($matches[2])."</h$level>";
     return "\n" . $this->hashBlock($block) . "\n\n";
   }
 
