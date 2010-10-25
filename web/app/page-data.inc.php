@@ -185,7 +185,8 @@ Class PageData {
 
   static function create_textfile_vars($page) {
     # store contents of content file (if it exists, otherwise, pass back an empty string)
-    $content_file_path = $page->file_path.'/'.$page->template_name.'.txt';
+    $content_file_path = glob($page->file_path .'/'. $page->template_name.'.*');
+    $content_file_path = !empty($content_file_path) ? $content_file_path[0] : '';
     $text = (file_exists($content_file_path)) ? file_get_contents($content_file_path) : '';
 
     # include shared variables for each page
@@ -195,13 +196,15 @@ Class PageData {
     $merged_text = preg_replace('/^\xEF\xBB\xBF|\x1A/', '', array($shared, $text));
 
     # merge shared content into text
-    $text = $merged_text[0]."\n-\n".$merged_text[1];
+    $shared = preg_replace('/\n\s*?-\s*?\n?$/', '', $merged_text[0]);
+    $content = preg_replace('/\n\s*?-\s*?\n?$/', '', $merged_text[1]);
+    $text = $shared."\n-\n".$content;
 
     # standardize line endings
     $text = preg_replace('/\r\n?/', "\n", $text);
 
     # pull out each key/value pair from the content file
-    $matches = preg_split('/\n\s*?-\s*?\n/', $text);
+    $matches = preg_split("/\n\s*?-\s*?\n/", $text);
 
     foreach($matches as $match) {
       # split the string by the first colon
