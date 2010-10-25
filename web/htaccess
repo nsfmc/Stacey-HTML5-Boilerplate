@@ -4,13 +4,13 @@ RewriteEngine on
 # ie. if in a folder named 'stacey', RewriteBase /stacey
 #RewriteBase /
 
-ErrorDocument 404 /404.html
+ErrorDocument 404 /404
 
 # Rewrite any calls to *.html, *.json, *.xml, *.atom, *.rss, *.rdf or *.txt if a folder matching * exists
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !public/
 RewriteCond %{DOCUMENT_ROOT}/public/$1.$2 !-f
-RewriteRule (.+)\.(html|json|xml|atom|rss|rdf|txt)$ $1/ [L]
+RewriteRule (.+)\.(html|json|xml|atom|rss|rdf|txt|css)$ $1/ [L]
 
 # Add a trailing slash to directories
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -122,12 +122,6 @@ FileETag None
 Options -MultiViews 
 # -Indexes will have Apache block users from browsing folders without a default document
 # Options -Indexes
-
-
-
-# custom 404 page
-ErrorDocument 404 /404.html
-
 
 
 # use utf-8 encoding for anything served text/plain or text/html
