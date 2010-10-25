@@ -39,9 +39,9 @@ Class Page {
   }
   
   function template_name() {
-    $txts = array_keys(Helpers::list_files($this->file_path, '/\.txt$/'));
+    $txts = array_keys(Helpers::list_files($this->file_path, '/\.(txt|css|md)$/'));
     # return first matched .txt file
-    return (!empty($txts)) ? preg_replace('/\.txt$/', '', $txts[0]) : false;
+    return (!empty($txts)) ? preg_replace('/\.(txt|css|md)$/', '', $txts[0]) : false;
   }
   
   function template_file() {
