@@ -60,22 +60,13 @@
     <script src="@root_path/public/docs/js/dd_belatedpng.js?v=1"></script>
   <![endif]-->
   
-  <!-- yui profiler and profileviewer - remove for production -->
-  <script src="@root_path/public/docs/js/profiling/yahoo-profiling.min.js?v=1"></script>
-  <script src="@root_path/public/docs/js/profiling/config.js?v=1"></script>
-  <!-- end profiling code -->
-
   <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
        change the UA-XXXXX-X to be your site's ID -->
   <script>
-  var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
-  (function(d, t) {
-   var g = d.createElement(t),
-       s = d.getElementsByTagName(t)[0];
-   g.async = true;
-   g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   s.parentNode.insertBefore(g, s);
-  })(document, 'script');
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>
   
 </body>
