@@ -185,7 +185,7 @@ Class PageData {
 
   static function create_textfile_vars($page) {
     # store contents of content file (if it exists, otherwise, pass back an empty string)
-    $content_file_path = glob($page->file_path .'/'. $page->template_name.'.*');
+    $content_file_path = glob($page->file_path .'/'. $page->template_name.'.{txt,md,css}',GLOB_BRACE);
     $content_file_path = !empty($content_file_path) ? $content_file_path[0] : '';
     $text = (file_exists($content_file_path)) ? file_get_contents($content_file_path) : '';
 
@@ -221,7 +221,7 @@ Class PageData {
       preg_match('/\.([\w\d]+?)$/', $current_page_template_file, $split_path);
       # set a variable with a name of 'key' on the page with a value of 'value'
       # if the template type is xml or html & the 'value' contains a newline character, parse it as markdown
-      if(strpos($colon_split[1], "\n") !== false && preg_match('/xml|htm|html/', $split_path[1])) {
+      if(strpos($colon_split[1], "\n") !== false && preg_match('/xml|htm|html|rss|rdf|atom/', $split_path[1])) {
         $page->$colon_split[0] = Markdown(trim($colon_split[1]));
       } else {
         $page->$colon_split[0] = trim($colon_split[1]);
