@@ -1,9 +1,34 @@
-selection_bg: red
+text_color: #444
 -
-selection_fg: #fff
+selection_bg: #f1f1f1
+-
+selection_fg: #666
+-
+link_color: #4d4d4d
+-
+link_hover: #444
 -
 primary_style:
   /*
-   * Author:  
+   * Author:  @name
    */
 
+-
+portrait_style:
+  /*
+   * Orientation: Portrait styles
+   */
+
+-
+landscape_style:
+  /*
+   * Orientation: Landscape styles
+   */
+
+-
+mobile_style:
+  /*
+   *  Mobile Styles
+   */
+
+-

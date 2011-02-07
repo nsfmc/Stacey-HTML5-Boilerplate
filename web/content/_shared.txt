@@ -1,6 +1,6 @@
-name: Site Name
+name: My Name
 -
-sitetitle: Page Title
+sitetitle: Site Name
 -
 contact: contact name
 -
