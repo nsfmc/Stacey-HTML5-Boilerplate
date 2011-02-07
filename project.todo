@@ -1,0 +1,31 @@
+You can keep your project todos here, this file follows the format for TaskPaper
+http://henrik.nyh.se/2007/08/tasks-bundle
+
+Customization:
+- chmod 777 web/app/_cache
+- symlink web/htaccess to web/.htaccess (and review any changes)
+  this will give you ?-free urls, mod-deflate, and other goodies
+- Update content/_shared.txt
+  these are site-wide variables
+
+  css:
+  - review the html5 boilerplate css in templates/style.css
+  - customize content/style/style.css
+
+  javascript:
+  - put plugins in public/docs/js/plugins.js
+  this is where i put underscore.js and friends
+  
+  web fonts:
+  - place web fonts in public/docs/type/
+  you can refer to them in your css as being at
+  @root_path/public/docs/type/blerg.otf
+
+Bugfixes:
+here's hoping this is a short list
+  
+  css:
+  css bugs? never!
+  
+  javascript:
+  javascript errors? what?
