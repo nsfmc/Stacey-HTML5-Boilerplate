@@ -8,9 +8,9 @@ Included is a project.todo tasklist file which should walk you through what sort
 
 ## So what?
 
-Stacey is a great filesystem backed cms, and it handles *many* cases for personal websites. I found myself creating a bare version of stacey a few times, and each time populating it with stock files: new jquery, yui css reset, html5shiv, etc. Then the HTML5 Boilerplate showed up and somewhat standardized many of these dependencies, so it seemed natural to incorporate the two.
+[Stacey](http://staceyapp.com) is a great filesystem backed cms, and it handles *many* cases for personal websites. I found myself creating a bare version of stacey a few times, and each time populating it with stock files: new jquery, yui css reset, html5shiv, etc. Then the [HTML5 Boilerplate](http://html5boilerplate.com/) showed up and somewhat standardized many of these dependencies, so it seemed natural to incorporate the two.
 
-*Note*, this is not a stacey template (no design is included!), it's only the combination of both stacey and the boilerplate so you can go forth and spend time actually *designing* your own client's portfolio site (or what have you).
+*Note*, this is not a stacey template (no design is included!), it's only the combination of both stacey and the boilerplate so you can go forth and spend time actually *designing* your own client's portfolio site (or what have you). The project structure is even broken up into two parts: assets (for pdfs or sketches of design) and web (for the working site). In many cases, you can create a virtualhost with its docroot as the web folder and get started.
 
 Still, it incorporates the best of stacey (flexible templates & partials) with the best of the boilerplate, and adds in, for example, a version of hyphenator.js that you can turn on via comments. The best part, imho, is that the boilerplate's `style.css` is also rendered via a template, which allows you to have the cleanliness of @imports, but mid-file, and in many locations. Additionally, robots.txt is handled via a template.
 
